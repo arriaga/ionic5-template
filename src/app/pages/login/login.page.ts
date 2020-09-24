@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../../services/authentication.service';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +17,7 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private alertController: AlertController,
-    private router: Router,
-    private loadingController: LoadingController
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -34,7 +32,7 @@ export class LoginPage implements OnInit {
   async login(){
 
     this.authService.login(this.credentials.value).subscribe(
-      async (res) => {
+       (res) => {
         this.router.navigateByUrl('/tabs', {replaceUrl: true});
       },
       async (res) => {
@@ -44,7 +42,7 @@ export class LoginPage implements OnInit {
           message: res.error.error,
           buttons: ['OK']
         });
-        alert.present();
+        await alert.present();
       }
     );
 
