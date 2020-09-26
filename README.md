@@ -25,3 +25,25 @@ ionic g guard guards/intro --implements CanLoad
 ionic g guard guards/autoLogin --implements CanLoad
 
 
+ionic capacitor add android
+
+ionic capacitor run android -l --host=YOUR_IP_ADDRESS
+
+
+npx cap open android 
+
+npx cap open ios 
+
+## Config IOS Notifications
+
+
+https://developer.apple.com/account/resources/
+
+Generar Certificado
+https://onesignal.com/provisionator
+
+ANOTAR PASSWORD GENERADO :  
+Password is: kvbszbniec
+
+DESCARGAR EL P12
+

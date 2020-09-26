@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  urlService: 'https://uauvdqck66.execute-api.us-east-1.amazonaws.com/dev/',
+  s3: 'https://rodisa-dev.s3.amazonaws.com',
+  idRemitente: '390109708902',
+  oneSignal: '2d198d3d-6da5-468d-8c21-81b640a44f29',
+  restApikey: 'M2ZiMTBjMzUtNDgwYy00ZmE5LTkyZDAtY2JkOTQ5MDliYmMy'
 };
 
 /*

@@ -42,8 +42,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                                     throw  error;
                                 }
                                 return error;
-                            }),
-                            tap(() => {
                             })
                         );
                     }),
