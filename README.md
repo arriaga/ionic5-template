@@ -43,6 +43,19 @@ Configurar firebase android notifications
 
 google-services.json -> android/app/google-services.json
 
+y agregar en el manifest
+
+   <service android:name="com.getcapacitor.plugin.background.BackgroundTaskService" android:exported="false" />
+        <receiver android:name="com.getcapacitor.plugin.notification.TimedNotificationPublisher" />
+        <receiver android:name="com.getcapacitor.plugin.notification.NotificationDismissReceiver" />
+        <meta-data android:name="firebase_messaging_auto_init_enabled" android:value="false" />
+        <service android:name="com.getcapacitor.CapacitorFirebaseMessagingService" android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
 ## Config IOS Notifications
 
 https://developer.apple.com/account/resources/certificates/list
