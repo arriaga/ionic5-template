@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "390109708902",
+    "firebase_url": "https://template-ionic5.firebaseio.com",
+    "project_id": "template-ionic5",
+    "storage_bucket": "template-ionic5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390109708902:android:de2e33fc17d3c9369363a7",
+        "android_client_info": {
+          "package_name": "com.arriaga.template"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390109708902-equevda95qip9gq6ida35sqp61qtvkou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoYgscMq_-qWNkQuY3HWH31JSwMBXOudQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390109708902-equevda95qip9gq6ida35sqp61qtvkou.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

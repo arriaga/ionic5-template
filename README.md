@@ -25,6 +25,8 @@ ionic g guard guards/intro --implements CanLoad
 ionic g guard guards/autoLogin --implements CanLoad
 
 
+
+
 ionic capacitor add android
 
 ionic capacitor run android -l --host=YOUR_IP_ADDRESS
@@ -34,16 +36,46 @@ npx cap open android
 
 npx cap open ios 
 
+
+## Config ANDROID Notifications
+
+Configurar firebase android notifications
+
+google-services.json -> android/app/google-services.json
+
 ## Config IOS Notifications
 
+https://developer.apple.com/account/resources/certificates/list
 
-https://developer.apple.com/account/resources/
+Crear una key  y descargar  el P8
 
-Generar Certificado
-https://onesignal.com/provisionator
+https://developer.apple.com/account/resources/authkeys/list
 
-ANOTAR PASSWORD GENERADO :  
-Password is: kvbszbniec
+Ir a fire Base  y crear push de ios 
 
-DESCARGAR EL P12
+
+Cloud Messagin 
+
+Subir la clave de autenticación de APNs
+
+Subir archvi P8
+
+agregar clave del key y clave el equipo
+
+Agregar en ios/App/Podfile
+
+pod 'Firebase/Messaging'
+
+npx cap update ios 
+
+https://capacitorjs.com/docs/guides/push-notifications-firebase
+
+npx cap sync
+
+
+
+
+
+
+
 
