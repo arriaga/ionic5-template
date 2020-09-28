@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../../services/authentication.service';
-import { async } from '@angular/core/testing';
+import { Plugins } from '@capacitor/core';
+const { SignInWithApple, Device } = Plugins;
 
 @Component({
   selector: 'app-login',
@@ -54,6 +55,21 @@ export class LoginPage implements OnInit {
 
 
   }
+
+  async sigInApple(){
+
+    const device = await Device.getInfo();
+
+    if (device.platform === 'ios') {
+      SignInWithApple.Authorize().then(response => {
+        console.log('Exito Sig In', response);
+      }).catch(response => {
+        console.error('Error Sig In', response);
+      });
+    }
+
+  }
+
   get email(){
 
     return this.credentials.get('email');
