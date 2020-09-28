@@ -65,9 +65,9 @@ export class LoginPage implements OnInit {
 
     if (device.platform === 'ios') {
       SignInWithApple.Authorize().then(response => {
-        console.log('Exito Sig In', response);
+        console.log('Exito Sig In', JSON.stringify(response));
       }).catch(response => {
-        console.error('Error Sig In', response);
+        console.error('Error Sig In', JSON.stringify(response));
       });
     }
 
