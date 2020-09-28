@@ -5,6 +5,8 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Plugins } from '@capacitor/core';
 const { SignInWithApple, Device } = Plugins;
+import '@codetrix-studio/capacitor-google-auth';
+
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,7 @@ export class LoginPage implements OnInit {
 
   credentials: FormGroup;
 
+  // 788126292621-fjo2gi8klemoadk9lv28f6gkf13f4ss9.apps.googleusercontent.com
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
@@ -66,6 +69,22 @@ export class LoginPage implements OnInit {
       }).catch(response => {
         console.error('Error Sig In', response);
       });
+    }
+
+  }
+
+  async sigInGoogle(){
+
+    const device = await Device.getInfo();
+
+    if (device.platform === 'android') {
+
+      const googleUser = await Plugins.GoogleAuth.signIn();
+
+      console.log("11111");
+      console.log(JSON.stringify(googleUser));
+      console.log("asadsada");
+
     }
 
   }
