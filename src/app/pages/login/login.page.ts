@@ -77,7 +77,7 @@ export class LoginPage implements OnInit {
 
     const device = await Device.getInfo();
 
-    if (device.platform === 'android') {
+    if (device.platform === 'android' || device.platform === 'ios' ) {
 
       const googleUser = await Plugins.GoogleAuth.signIn();
 
