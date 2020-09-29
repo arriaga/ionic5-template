@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Plugins } from '@capacitor/core';
-const { SignInWithApple, Device } = Plugins;
+const { SignInWithApple, Device , FacebookLogin } = Plugins;
+import { FacebookLoginResponse } from '@rdlabo/capacitor-facebook-login';
 import '@codetrix-studio/capacitor-google-auth';
 
 
@@ -85,6 +86,20 @@ export class LoginPage implements OnInit {
       console.log(JSON.stringify(googleUser));
       console.log("asadsada");
 
+    }
+
+  }
+
+  async sigFaceBook(){
+
+    const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+    const result = await <FacebookLoginResponse> FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+
+    if (result.accessToken) {
+      // Login successful.
+      console.log(`Facebook access token is ${result.accessToken.token}`);
+    } else {
+      // Cancelled by user.
     }
 
   }
