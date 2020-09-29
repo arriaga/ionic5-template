@@ -25,3 +25,62 @@ ionic g guard guards/intro --implements CanLoad
 ionic g guard guards/autoLogin --implements CanLoad
 
 
+## Sig In Google
+
+https://console.cloud.google.com/apis/credentials
+
+## Generar KeyStore
+
+keytool -genkey -v -keystore main.keystore -alias templateionic -keyalg RSA -keysize 2048 -validity 10000
+
+## Ver KyeStore
+keytool -keystore main.keystore -list -v 
+
+/android/app/src/main/res/values
+
+agregar 
+<resources>
+  <string name="server_client_id">Your Web Client Key</string>
+</resources>
+
+
+Agregar main
+import com.codetrixstudio.capacitor.GoogleAuth.GoogleAuth;
+
+MainActivity.onCreate
+
+this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
+  add(GoogleAuth.class);
+}});
+
+capacitor.config.json
+{
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": ["profile", "email"],
+      "serverClientId": "xxxxxx-xxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+      "forceCodeForRefreshToken" : true
+    }
+  }
+}
+
+ signingConfigs{
+        release{
+            storeFile file("main.keystore")
+            storePassword 'Arriaga02*'
+            keyAlias 'templateionic'
+            keyPassword 'Arriaga02*'
+        }
+        debug{
+            storeFile file("main.keystore")
+            storePassword 'Arriaga02*'
+            keyAlias 'templateionic'
+            keyPassword 'Arriaga02*'
+        }
+    }
+
+
+
+
+
+

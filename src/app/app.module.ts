@@ -8,9 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';s
 import { OneSignal } from '@ionic-native/onesignal/ngx';
-
+import '@codetrix-studio/capacitor-google-auth';
 
 @NgModule({
   declarations: [AppComponent],
