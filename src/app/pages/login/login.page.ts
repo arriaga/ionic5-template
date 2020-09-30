@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Plugins } from '@capacitor/core';
-const { SignInWithApple, Device } = Plugins;
+const { SignInWithApple, Device , FacebookLogin } = Plugins;
+import { FacebookLoginResponse } from '@rdlabo/capacitor-facebook-login';
 import '@codetrix-studio/capacitor-google-auth';
 
 
@@ -16,6 +17,8 @@ import '@codetrix-studio/capacitor-google-auth';
 export class LoginPage implements OnInit {
 
   credentials: FormGroup;
+
+  datos: any;
 
   // 788126292621-fjo2gi8klemoadk9lv28f6gkf13f4ss9.apps.googleusercontent.com
   constructor(
@@ -82,6 +85,37 @@ export class LoginPage implements OnInit {
       console.log("asadsada");
 
     }
+
+  }
+
+  async sigFaceBook(){
+
+    const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+
+    const result = await  <FacebookLoginResponse> FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+
+
+    if (result.accessToken) {
+
+      // Login successful.s
+      console.log(`Facebook access tokens is ${JSON.stringify(result)}`);
+
+      console.log("Asdasdsad");
+      console.log(result.accessToken.token);
+      this.authService.profileFacebook(result.accessToken.token).subscribe( (data: any) => {
+        console.log(data);
+        this.datos = data.picture.data.url;
+      });
+    } else {
+      // Cancelled by user.
+    }
+
+  }
+
+  async logout(){
+    const result11 = await FacebookLogin.logout();
+
+    console.log('logout', JSON.stringify(result11));
 
   }
 
