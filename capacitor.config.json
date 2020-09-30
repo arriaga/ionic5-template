@@ -14,5 +14,12 @@
       "forceCodeForRefreshToken" : true
     }
   },
-  "cordova": {}
+  "cordova": {},
+  "server": {
+    "allowNavigation": [
+      "*.facebook.com",
+      "localhost"
+    ],
+    "cleartext": true
+  }
 }
