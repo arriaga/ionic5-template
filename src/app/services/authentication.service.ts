@@ -4,6 +4,7 @@ import { Plugins } from '@capacitor/core';
 const {Storage}  = Plugins;
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map , switchMap , tap } from 'rxjs/operators';
+import {log} from 'util';
 
 const TOKEN_KEY =  'my-token';
 @Injectable({
@@ -42,6 +43,11 @@ export class AuthenticationService {
       })
     );
    }
+
+
+    profileFacebook(accessToken: string) {
+        return this.http.get(`https://graph.facebook.com/me?fields=name,email,picture.width(400).height(400)&access_token=${accessToken}`);
+    }
 
    logout(): Promise<void>{
     this.isAuthenticated.next(false);

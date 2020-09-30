@@ -18,6 +18,8 @@ export class LoginPage implements OnInit {
 
   credentials: FormGroup;
 
+  datos: any;
+
   // 788126292621-fjo2gi8klemoadk9lv28f6gkf13f4ss9.apps.googleusercontent.com
   constructor(
     private fb: FormBuilder,
@@ -93,14 +95,31 @@ export class LoginPage implements OnInit {
   async sigFaceBook(){
 
     const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
-    const result = await <FacebookLoginResponse> FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+
+    const result = await  <FacebookLoginResponse> FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+
 
     if (result.accessToken) {
-      // Login successful.
-      console.log(`Facebook access token is ${result.accessToken.token}`);
+
+      // Login successful.s
+      console.log(`Facebook access tokens is ${JSON.stringify(result)}`);
+
+      console.log("Asdasdsad");
+      console.log(result.accessToken.token);
+      this.authService.profileFacebook(result.accessToken.token).subscribe( (data: any) => {
+        console.log(data);
+        this.datos = data.picture.data.url;
+      });
     } else {
       // Cancelled by user.
     }
+
+  }
+
+  async logout(){
+    const result11 = await FacebookLogin.logout();
+
+    console.log('logout', JSON.stringify(result11));
 
   }
 

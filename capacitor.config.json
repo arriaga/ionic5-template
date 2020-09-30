@@ -9,10 +9,18 @@
       "launchShowDuration": 0
     },
     "GoogleAuth": {
-      "scopes": ["profile", "email"],
+      "scopes": [
+        "profile",
+        "email"
+      ],
       "serverClientId": "390109708902-equevda95qip9gq6ida35sqp61qtvkou.apps.googleusercontent.com",
-      "forceCodeForRefreshToken" : true
+      "forceCodeForRefreshToken": true
     }
   },
-  "cordova": {}
+  "cordova": {},
+  "server": {
+    "allowNavigation": [
+      "*.facebook.com"
+    ]
+  }
 }
