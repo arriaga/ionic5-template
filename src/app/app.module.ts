@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouteReuseStrategy} from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';s
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import '@codetrix-studio/capacitor-google-auth';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HttpRequestInterceptor} from './interceptors/http-loading.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +22,13 @@ import '@codetrix-studio/capacitor-google-auth';
     SplashScreen,
     OneSignal,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      {
+          provide: HTTP_INTERCEPTORS,
+          useClass: HttpRequestInterceptor,
+          multi: true
+      }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
