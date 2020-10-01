@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, Router, UrlSegment } from '@angular/router';
-import { Plugins } from '@capacitor/core';
-const {Storage}  = Plugins;
+import { CanLoad, Router } from '@angular/router';
+import {Constants} from '../utils/constants';
+import {StorageService} from '../services/storage.service';
 
-export const INTRO_KEY = 'intro-seen';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IntroGuard implements CanLoad {
 
-  constructor(private router: Router){
+  constructor(private router: Router, private  storageService: StorageService){
 
   }
 
   async canLoad(): Promise<boolean> {
 
-    const hasSeenIntro =  await Storage.get({key: INTRO_KEY});
+    const hasSeenIntro =  await this.storageService.getStorage(Constants.INTRO_KEY);
 
     if (hasSeenIntro && ( hasSeenIntro.value === 'true')){
       return true;

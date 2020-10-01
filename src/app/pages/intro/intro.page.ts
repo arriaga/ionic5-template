@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 import { IonSlides } from '@ionic/angular';
-import { INTRO_KEY } from '../../guards/intro.guard';
-const {Storage}  = Plugins;
+import {StorageService} from '../../services/storage.service';
+import {Constants} from '../../utils/constants';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class IntroPage implements OnInit {
 
   @ViewChild(IonSlides) slides: IonSlides;
 
-  constructor(private router: Router){
+  constructor(private router: Router, private  storageService: StorageService){
 
   }
 
@@ -28,7 +28,7 @@ export class IntroPage implements OnInit {
   }
 
   async start(){
-    await Storage.set({key: INTRO_KEY, value: 'true'});
+    await  this.storageService.saveToStorage(Constants.INTRO_KEY, true);
     this.router.navigateByUrl('/login', { replaceUrl: true });
 
   }
