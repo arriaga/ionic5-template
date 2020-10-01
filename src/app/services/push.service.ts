@@ -35,7 +35,7 @@ export class PushService {
 
         const device = await Device.getInfo();
 
-        if (device.platform === 'android' || device.platform === 'ios') {
+        if (device.platform !== 'web') {
 
             this.oneSignal.startInit(this.oneSignalAppID, this.senderId);
 
