@@ -80,7 +80,7 @@ export class LoginPage implements OnInit {
 
       const googleUser = await Plugins.GoogleAuth.signIn();
 
-      console.log("11111");
+      console.log('11111');
       console.log(JSON.stringify(googleUser));
       console.log('asadsada');
 
@@ -92,7 +92,7 @@ export class LoginPage implements OnInit {
 
     const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
 
-    const result = await  <FacebookLoginResponse> FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    const result: FacebookLoginResponse  = await  FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
 
 
     if (result.accessToken) {
@@ -100,7 +100,7 @@ export class LoginPage implements OnInit {
       // Login successful.s
       console.log(`Facebook access tokens is ${JSON.stringify(result)}`);
 
-      console.log("Asdasdsad");
+      console.log('Asdasdsad');
       console.log(result.accessToken.token);
       this.authService.profileFacebook(result.accessToken.token).subscribe( (data: any) => {
         console.log(data);

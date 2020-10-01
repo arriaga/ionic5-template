@@ -26,7 +26,7 @@ export class PushService {
         this.loadMessages();
     }
 
-    async getMessages() {
+    async getMe() {
         await this.loadMessages();
         return [...this.messages];
     }
@@ -60,7 +60,6 @@ export class PushService {
                 console.log(this.userId);
 
                 console.log('Saving in Storage', this.userId);
-                //this.storageService.guardarEnStorage('idPush', this.userId);
             });
 
             this.oneSignal.endInit();
