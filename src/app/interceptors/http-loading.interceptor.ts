@@ -3,17 +3,15 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {from, Observable, throwError} from 'rxjs';
 import {LoadingController} from '@ionic/angular';
 import {catchError, delay, finalize, map, retryWhen, switchMap, tap} from 'rxjs/operators';
-import {Plugins} from '@capacitor/core';
-
-const {Storage} = Plugins;
-const TOKEN_KEY = 'my-token';
+import {StorageService} from '../services/storage.service';
+import {Constants} from '../utils/constants';
 
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 
 
-    constructor(private loadingController: LoadingController) {
+    constructor(private loadingController: LoadingController , private storageService: StorageService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,7 +27,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             }
         });
 
-        return from(Storage.get({key: TOKEN_KEY})).pipe(
+        return from(this.storageService.getStorage(Constants.TOKEN_KEY)).pipe(
             switchMap(token => {
                 req = this.addToken(req, token);
                 return next.handle(req).pipe(

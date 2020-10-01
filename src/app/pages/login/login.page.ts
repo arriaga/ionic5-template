@@ -82,7 +82,7 @@ export class LoginPage implements OnInit {
 
       console.log("11111");
       console.log(JSON.stringify(googleUser));
-      console.log("asadsada");
+      console.log('asadsada');
 
     }
 

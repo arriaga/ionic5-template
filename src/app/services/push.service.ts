@@ -14,7 +14,7 @@ export class PushService {
     senderId = environment.senderId;
     oneSignalAppID = environment.oneSignalAppID;
 
-    mensajes: OSNotificationPayload[] = [];
+    messages: OSNotificationPayload[] = [];
 
     userId: string;
 
@@ -23,15 +23,15 @@ export class PushService {
 
     constructor(private oneSignal: OneSignal) {
 
-        this.cargarMensajes();
+        this.loadMessages();
     }
 
-    async getMensajes() {
-        await this.cargarMensajes();
-        return [...this.mensajes];
+    async getMessages() {
+        await this.loadMessages();
+        return [...this.messages];
     }
 
-    async configuracionInicial() {
+    async initialSetup() {
 
         const device = await Device.getInfo();
 
@@ -43,14 +43,14 @@ export class PushService {
 
             this.oneSignal.handleNotificationReceived().subscribe((noti) => {
                 // do something when notification is received
-                console.log('Notificación recibida', noti);
-                this.notificacionRecibida(noti);
+                console.log('Notification received', noti);
+                this.notificationReceived(noti);
             });
 
             this.oneSignal.handleNotificationOpened().subscribe(async (noti) => {
                 // do something when a notification is opened
-                console.log('Notificación abierta', noti);
-                await this.notificacionRecibida(noti.notification);
+                console.log('Open notification', noti);
+                await this.notificationReceived(noti.notification);
             });
 
 
@@ -59,7 +59,7 @@ export class PushService {
                 this.userId = info.userId || 'bb4c4088-3427-44ff-8380-570aa6c1ce1a';
                 console.log(this.userId);
 
-                console.log('Guardando en el Storage', this.userId);
+                console.log('Saving in Storage', this.userId);
                 //this.storageService.guardarEnStorage('idPush', this.userId);
             });
 
@@ -70,49 +70,48 @@ export class PushService {
     }
 
     async getUserIdOneSignal() {
-        console.log('Cargando userId');
+        console.log('Loading userId');
         // Obtener ID del suscriptor
         const info = await this.oneSignal.getIds();
         this.userId = info.userId;
         return info.userId;
     }
 
-    async notificacionRecibida(noti: OSNotification) {
+    async notificationReceived(noti: OSNotification) {
 
-        await this.cargarMensajes();
+        await this.loadMessages();
 
         const payload = noti.payload;
 
-        const existePush = this.mensajes.find(mensaje => mensaje.notificationID === payload.notificationID);
+        const pusExist = this.messages.find(message => message.notificationID === payload.notificationID);
 
-        if (existePush) {
+        if (pusExist) {
             return;
         }
 
-        this.mensajes.unshift(payload);
+        this.messages.unshift(payload);
         this.pushListener.emit(payload);
 
-        await this.guardarMensajes();
+        await this.saveMessages();
 
     }
 
-    guardarMensajes() {
-        Storage.set({key: 'MENSAJES', value: this.mensajes.toString()});
+    saveMessages() {
+        Storage.set({key: 'MENSAJES', value: this.messages.toString()});
     }
 
-    async cargarMensajes() {
+    async loadMessages() {
 
         const mensajes = await Storage.get({key: 'MENSAJES'}) || [];
-
-        this.mensajes = [];
-        return this.mensajes;
+        this.messages = [];
+        return this.messages;
 
     }
 
-    async borrarMensajes() {
+    async deleteMessages() {
         await Storage.clear();
-        this.mensajes = [];
-        this.guardarMensajes();
+        this.messages = [];
+        this.saveMessages();
     }
 
 }
