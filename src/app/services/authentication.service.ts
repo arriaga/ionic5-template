@@ -4,7 +4,6 @@ import { Plugins } from '@capacitor/core';
 const {Storage}  = Plugins;
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map , switchMap , tap } from 'rxjs/operators';
-import {log} from 'util';
 
 const TOKEN_KEY =  'my-token';
 @Injectable({
